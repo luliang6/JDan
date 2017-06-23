@@ -56,5 +56,8 @@ dependencies {
     // json
     compile 'com.alibaba:fastjson:1.1.54.android'
 
+    // OkGo
+    compile 'com.lzy.net:okgo:3.0.1'
+
 
 }

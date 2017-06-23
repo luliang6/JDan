@@ -50,6 +50,24 @@ public class MainActivity extends BaseActivity {
 	}
 
 	@Override
+	protected void onStart() {
+		super.onStart();
+		//		EventBus.getDefault().register(this);
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		//		EventBus.getDefault().unregister(this);
+	}
+
+	@Override
+	protected void onDestroy() {
+		super.onDestroy();
+		unregisterReceiver(mNetStateReceiver);
+	}
+
+	@Override
 	protected void initView() {
 		ButterKnife.bind(this);
 
@@ -77,12 +95,17 @@ public class MainActivity extends BaseActivity {
 
 		mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);// mActionBarDrawerToggle实现了DrawerListener接口
 
-		replaceFragment(R.id.frame_container, new HomeNewsFragment());// 替换内容部分
 		replaceFragment(R.id.drawer_container, new MainMenuFragment());// 替换菜单部分
+		replaceFragment(R.id.frame_container, new HomeNewsFragment());// 替换内容部分
 	}
 
 	@Override
 	protected void initData() {
+
+	}
+
+	@Override
+	protected void initEvent() {
 		// 网络状态的广播
 		mNetStateReceiver = new BroadcastReceiver() {
 			@Override
@@ -103,18 +126,7 @@ public class MainActivity extends BaseActivity {
 		};
 
 		registerReceiver(mNetStateReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-	}
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-		//		EventBus.getDefault().register(this);
-	}
-
-	@Override
-	protected void onStop() {
-		super.onStop();
-		//		EventBus.getDefault().unregister(this);
 	}
 
 	// 似乎没有用到?
@@ -147,12 +159,6 @@ public class MainActivity extends BaseActivity {
 		}
 
 	}*/
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		unregisterReceiver(mNetStateReceiver);
-	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {

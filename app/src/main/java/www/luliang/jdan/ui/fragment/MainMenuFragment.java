@@ -44,7 +44,6 @@ public class MainMenuFragment extends BaseFragment {
 	private MenuItem.FragmentType mCurrentFragment = MenuItem.FragmentType.FreshNews;
 	private MenuAdapter mAdapter;
 
-	// 1
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 
@@ -56,11 +55,11 @@ public class MainMenuFragment extends BaseFragment {
 
 	}
 
-	// 2
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
 			savedInstanceState) {
+
 		View view = inflater.inflate(R.layout.fragment_drawer, container, false);
 		ButterKnife.bind(this, view);
 
@@ -90,7 +89,6 @@ public class MainMenuFragment extends BaseFragment {
 		mRecyclerView.setAdapter(mAdapter);
 	}
 
-
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -108,6 +106,7 @@ public class MainMenuFragment extends BaseFragment {
 
 
 	}
+
 
 	public class MenuAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
@@ -134,25 +133,27 @@ public class MainMenuFragment extends BaseFragment {
 			// 点击事件
 
 			holder.rl_container.setOnClickListener(new View.OnClickListener() {
-	               @Override
-	               public void onClick(View v) {
-	                   try {
-	                       if (mCurrentFragment != menuItem.getType()) {
-	                           // 反射
-	                           Fragment fragment = (Fragment) Class.forName(menuItem.getFragment().getName())
-	                                   .newInstance();
-	                           mMainActivity.replaceFragment(R.id.frame_container, fragment);
-	                           mCurrentFragment = menuItem.getType();
+				                                       @Override
+				                                       public void onClick(View v) {
+					                                       try {
+						                                       if (mCurrentFragment != menuItem.getType()) {
+							                                       // 反射
+							                                       Fragment fragment = (Fragment) Class.forName
+									                                       (menuItem.getFragment().getName())
+									                                       .newInstance();
+							                                       mMainActivity.replaceFragment(R.id.frame_container,
+									                                       fragment);
+							                                       mCurrentFragment = menuItem.getType();
 
-	                       }
-	                   } catch (Exception e) {
-	                       e.printStackTrace();
-	                   }
-	                   mMainActivity.closeDrawer();
-	               }
+						                                       }
+					                                       } catch (Exception e) {
+						                                       e.printStackTrace();
+					                                       }
+					                                       mMainActivity.closeDrawer();
+				                                       }
 
 
-	           }
+			                                       }
 
 			);
 

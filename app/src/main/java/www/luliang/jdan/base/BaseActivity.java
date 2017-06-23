@@ -17,7 +17,6 @@ import www.luliang.jdan.utils.logger.Logger;
 /**
  * Activity的基类
  */
-
 public abstract class BaseActivity extends AppCompatActivity implements ConstantString {
 	protected Context    mContext;
 	private   Request<?> mRequest;
@@ -37,15 +36,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Constant
 
 		}
 
+		initEvent();
 
 	}
-
-	/*@Override
-	public void finish() {
-		super.finish();
-		// 转场动画
-		overridePendingTransition(R.anim.anim_none, R.anim.trans_center_2_right);
-	}*/
 
 	@Override
 	protected void onDestroy() {
@@ -56,9 +49,21 @@ public abstract class BaseActivity extends AppCompatActivity implements Constant
 
 	}
 
+	/*@Override
+	public void finish() {
+		super.finish();
+		// 转场动画
+		overridePendingTransition(R.anim.anim_none, R.anim.trans_center_2_right);
+	}*/
+
 	// 2个抽象类
 	protected abstract void initView();
+
 	protected abstract void initData();
+
+	protected void initEvent() {
+
+	}
 
 	/**
 	 * 替换碎片
@@ -73,7 +78,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Constant
 		transaction.commit();
 	}
 
-	public void executeRequest(Request<?> request) {
+	protected void executeRequest(Request<?> request) {
 		mRequest = request;
 		RequestManager.addRequest(request, this);
 	}
